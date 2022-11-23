@@ -18,7 +18,7 @@ public class VizitkaController {
     private final VizitkaRepository repository;
 
     @Autowired
-    public OsobaController(VizitkaRepository repository) {
+    public VizitkaController(VizitkaRepository repository) {
         this.repository = repository;
     }
     @InitBinder
