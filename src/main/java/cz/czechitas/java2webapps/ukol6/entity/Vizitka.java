@@ -1,46 +1,73 @@
 package cz.czechitas.java2webapps.ukol6.entity;
 
+import org.hibernate.validator.constraints.Length;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+
+@Entity
 public class Vizitka {
-    private String jmeno;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Length(max = 100)
+    @NotBlank
+    private String celejmeno;
+    @Length(max = 100)
+    @NotBlank
     private String firma;
+    @Length(max = 100)
+    @NotBlank
     private String ulice;
-    private String obecPsc;
+
+    @Length(max = 100)
+    @NotBlank
+    private String obec;
+
+    @Length(max = 5)
+    @NotBlank
+    private String psc;
+
+    @Length(max = 200)
     private String celaAdresa;
+
+
+    @Length(max = 100)
     private String email;
+    @Length(max = 20)
     private String telefon;
+    @Length(max = 100)
     private String web;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    private String id;
 
     public Vizitka() {
     }
 
-    public Vizitka(String jmeno, String firma, String ulice, String obecPsc, String celaAdresa, String email, String telefon, String web, String id) {
-        this.jmeno = jmeno;
+    public Vizitka (Long id, String celejmeno, String firma, String ulice, String obec, String psc, String email, String telefon, String web) {
+        this.id = id;
+        this.celejmeno = celejmeno;
         this.firma = firma;
         this.ulice = ulice;
-        this.obecPsc = obecPsc;
-        this.celaAdresa = celaAdresa;
+        this.obec = obec;
+        this.psc = psc;
         this.email = email;
         this.telefon = telefon;
-        this.web = web;
-        this.id = id;
     }
 
-    public String getObecPsc() {
-        return obecPsc;
+    public Long getId() { return id; }
+
+    public void setId(Long id) { this.id = id; }
+
+
+    public String getObec() {
+        return obec;
     }
 
-    public void setObecPsc(String obecPsc) {
-        this.obecPsc = obecPsc;
+    public void setObec(String obecPsc) {
+        this.obec = obecPsc;
     }
 
     public String getCelaAdresa() {
@@ -75,6 +102,14 @@ public class Vizitka {
         this.web = web;
     }
 
+    public String getPsc() {
+        return psc;
+    }
+
+    public void setPsc(String psc) {
+        this.psc = psc;
+    }
+
     public String getUlice() {
         return ulice;
     }
@@ -91,16 +126,11 @@ public class Vizitka {
         this.firma = firma;
     }
 
-    public String getJmeno() {
-        return jmeno;
+    public String getCelejmeno() {
+        return celejmeno;
     }
 
-    public void setJmeno(String jmeno) {
-        this.jmeno = jmeno;
+    public void setCelejmeno(String celejmeno) {
+        this.celejmeno = celejmeno;
     }
-
-    //celaAdresa (readonly property, ve tvaru „ulice, obecPsc“)
-
 }
-
-
