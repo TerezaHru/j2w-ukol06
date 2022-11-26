@@ -1,8 +1,8 @@
 [#ftl]
 [@c.page]
     <div class="detail">
-        [@form.form class="vizitka" bind="vizitka"]
-            [@form.input name="jmeno" label="Jméno" maxlength="100" required="required" /]
+        [@form.form class="vizitka" method="post" bind="vizitka"]
+            [@form.input name="celejmeno" label="Jméno" maxlength="100" required="required" /]
             [@form.input name="firma" label="Firma" maxlength="100" required="required" /]
             [@form.input name="ulice" label="Ulice a čísla" maxlength="100" required="required" /]
             [@form.input name="obec" label="Obec" maxlength="100" required="required" /]
@@ -14,7 +14,5 @@
                 <button type="submit">Odeslat</button>
             </div>
         [/@form.form]
-
-        [@c.back /]
     </div>
 [/@c.page]
