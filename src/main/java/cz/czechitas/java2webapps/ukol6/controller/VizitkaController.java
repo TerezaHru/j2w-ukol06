@@ -3,15 +3,18 @@ import cz.czechitas.java2webapps.ukol6.entity.Vizitka;
 import cz.czechitas.java2webapps.ukol6.repository.VizitkaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
-import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-import java.util.List;
+import java.util.Optional;
+
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Controller
 @RequestMapping("/")
@@ -35,16 +38,21 @@ public class VizitkaController {
                 .addObject("osoby", vizitkaRepository.findAll());
     }
 
-
     @GetMapping("/detail/{id}")
-    public ModelAndView detail(@PathVariable int id) {
-        ModelAndView modelAndView = new ModelAndView("vizitka");
-        Vizitka vizitka = vizitkaRepository.findById(new Long(id)).get();
-        modelAndView.addObject("vizitka", vizitka);
+            public ModelAndView detail(@PathVariable int id) {
+            ModelAndView modelAndView = new ModelAndView("vizitka");
 
-        return modelAndView;
+            Optional<Vizitka> optionalvizitka = vizitkaRepository.findById(new Long(id));
+
+            if(optionalvizitka.isPresent()) {
+                Vizitka vizitka = optionalvizitka.get();
+                modelAndView.addObject("vizitka", vizitka);
+                return modelAndView;
+            }
+            else{
+                throw new ResponseStatusException(NOT_FOUND, "404 not found - Vizitka nenalezena.");
+            }
     }
-
     @GetMapping("/nova")
     public ModelAndView formular() {
         ModelAndView modelAndView= new ModelAndView("formular");
@@ -52,11 +60,11 @@ public class VizitkaController {
         return modelAndView;
     }
     @PostMapping("/nova")
-    public Object pridat(/*@PathVariable long id, */@ModelAttribute("vizitka") @Valid Vizitka vizitka, BindingResult bindingResult) {
+    public Object pridat(@ModelAttribute("vizitka") @Valid Vizitka vizitka, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "formular";
         }
-    //vizitka.setId(id);
+
     vizitkaRepository.save(vizitka);
     return "redirect:/";
     }
