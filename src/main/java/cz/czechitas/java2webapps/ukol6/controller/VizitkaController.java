@@ -1,11 +1,14 @@
 package cz.czechitas.java2webapps.ukol6.controller;
+import cz.czechitas.java2webapps.ukol6.entity.Vizitka;
 import cz.czechitas.java2webapps.ukol6.repository.VizitkaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -34,13 +37,13 @@ public class VizitkaController {
     }
 
 
-
-    @GetMapping("/detail")
-    public ModelAndView vizitka() {
-        ModelAndView modelAndView= new ModelAndView("vizitka");
+    @GetMapping("/detail/{id}")
+    public ModelAndView detail(@PathVariable int id) {
+        ModelAndView modelAndView = new ModelAndView("vizitka");
+        Vizitka vizitka = repository.findById(new Long(id)).get();
+        modelAndView.addObject("vizitka", vizitka);
         return modelAndView;
     }
-
 /*
     @GetMapping("/nova")
     public ModelAndView formular() {

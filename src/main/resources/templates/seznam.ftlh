@@ -1,9 +1,10 @@
 [#ftl]
 [@c.page]
     <div class="seznam">
-        <a href="/detail">
-            [#list ]
+
+            [#list osoby]
                 [#items as vizitka]
+        <a href="/detail/${vizitka.id}" class="btn btn-primary">
             <div class="vizitka">
                 <div class="jmeno">${vizitka.celejmeno}</div>
                 <div class="firma">${vizitka.firma}</div>
@@ -19,11 +20,12 @@
                     </div>
                 </div>
             </div>
+        </a>
                 [/#items]
                 [#else]
                     <p>Seznam osob je prázdný.</p>
             [/#list]
-        </a>
+
 
         <a href="/nova">
             <div class="vizitka vizitka--nova">
