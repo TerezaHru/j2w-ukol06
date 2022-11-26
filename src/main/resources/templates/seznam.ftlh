@@ -1,19 +1,9 @@
-[#items as osoba]
-    <tr>
-        <td>${osoba.jmeno}</td>
-        <td>${osoba.prijmeni}</td>
-        <td>${osoba.datumNarozeni?date}</td>
-        <td>${osoba.adresa}</td>
-        <td class="d-flex justify-content-end"><a href="/${osoba.id}" class="btn btn-primary">Detail</a></td>
-    </tr>
-[/#items]
-
-
 [#ftl]
 [@c.page]
     <div class="seznam">
         <a href="/detail">
-            [#items as vizitka]
+            [#list ]
+                [#items as vizitka]
             <div class="vizitka">
                 <div class="jmeno">${vizitka.celejmeno}</div>
                 <div class="firma">${vizitka.firma}</div>
@@ -29,7 +19,10 @@
                     </div>
                 </div>
             </div>
-            [/#items]
+                [/#items]
+                [#else]
+                    <p>Seznam osob je prázdný.</p>
+            [/#list]
         </a>
 
         <a href="/nova">

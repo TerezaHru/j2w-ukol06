@@ -33,13 +33,7 @@ public class VizitkaController {
                 .addObject("osoby", repository.findAll());
     }
 
-    /*@GetMapping("/")
 
-
-    public ModelAndView seznam() {
-        ModelAndView modelAndView = new ModelAndView("seznam");
-        return modelAndView;
-    }
 
     @GetMapping("/detail")
     public ModelAndView vizitka() {
@@ -47,6 +41,7 @@ public class VizitkaController {
         return modelAndView;
     }
 
+/*
     @GetMapping("/nova")
     public ModelAndView formular() {
         ModelAndView modelAndView= new ModelAndView("formular");

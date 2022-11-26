@@ -1,7 +1,5 @@
 package cz.czechitas.java2webapps.ukol6.entity;
-
 import org.hibernate.validator.constraints.Length;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -32,8 +30,8 @@ public class Vizitka {
     @NotBlank
     private String psc;
 
-    @Length(max = 200)
-    private String celaAdresa;
+    //@Length(max = 200)
+    //private String celaAdresa;
 
 
     @Length(max = 100)
@@ -55,6 +53,7 @@ public class Vizitka {
         this.psc = psc;
         this.email = email;
         this.telefon = telefon;
+        this.web = web;
     }
 
     public Long getId() { return id; }
@@ -70,13 +69,9 @@ public class Vizitka {
         this.obec = obecPsc;
     }
 
-    public String getCelaAdresa() {
-        return celaAdresa;
-    }
+    //public String getCelaAdresa() {return celaAdresa; }
 
-    public void setCelaAdresa(String celaAdresa) {
-        this.celaAdresa = celaAdresa;
-    }
+    //public void setCelaAdresa(String celaAdresa) {this.celaAdresa = celaAdresa;}
 
     public String getEmail() {
         return email;

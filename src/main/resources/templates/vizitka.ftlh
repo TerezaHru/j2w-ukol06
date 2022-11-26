@@ -2,6 +2,9 @@
 [@c.page]
     <div class="detail">
         <div class="vizitka">
+            [#if zamestnanec.jmeno?exists]
+                <div class="jmeno">${zamestnanec.jmeno}</div>
+            [/#if]
             <div class="jmeno">Dita (Přikrylová) Formánková</div>
             <div class="firma">Czechitas z. s.</div>
             <div class="udaje">
